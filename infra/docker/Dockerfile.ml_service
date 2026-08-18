@@ -33,13 +33,14 @@ WORKDIR /app
 COPY --from=builder /root/.local /home/appuser/.local
 COPY ml_common ./ml_common
 COPY ml_service ./ml_service
+COPY ml_training ./ml_training
 
-# Model artifacts are expected to be mounted at runtime (a Docker volume
-# populated by the ml_trainer service in docker-compose, or a persistent
-# volume/object-storage mount in production) rather than baked into the
-# image -- this is what lets a new model version ship without a rebuild,
-# per the approved architecture's model-rollout strategy.
-RUN mkdir -p /app/artifacts && chown -R appuser:appuser /app
+# Bake the model artifacts directly into the image for simpler standalone
+# deployments on platforms like Render where persistent shared volumes
+# are not available on free tiers.
+RUN mkdir -p /app/artifacts && \
+    python -m ml_training.run_training --dataset ml_training/datasets/sample_messages.csv --version v1 --artifacts-dir /app/artifacts && \
+    chown -R appuser:appuser /app
 USER appuser
 
 ENV PATH=/home/appuser/.local/bin:$PATH \
