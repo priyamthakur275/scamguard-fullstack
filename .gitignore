@@ -1,0 +1,38 @@
+# General
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# Infra
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.backup
+infra/.env
+!infra/.env.example
+
+# Backend
+venv/
+__pycache__/
+.pytest_cache/
+*.sqlite3
+*.db
+.env
+.env.*
+!.env.example
+artifacts/
+ml_training/data/
+coverage_html_report/
+.coverage
+
+# Frontend
+node_modules/
+.next/
+out/
+build/
+.env
+.env.local
+.env.production
+.env.development
+!.env.example
+
