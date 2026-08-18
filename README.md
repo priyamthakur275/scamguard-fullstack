@@ -65,6 +65,11 @@ APP_SERVICE_URL=http://127.0.0.1:8000
 - **Database Connection Issues**: Ensure PostgreSQL is running and the `DATABASE_URL` is correct. If using Docker, verify the DB container is healthy. The default development setup uses SQLite.
 - **Model Loading Errors**: Ensure the ML service has access to the model artifacts directory and sufficient memory.
 
+### Live Demo
+The application is currently deployed via Serveo for public access.
+- **Frontend / Live Demo URL**: [https://13243a1b972683b1-103-40-80-2.serveousercontent.com](https://13243a1b972683b1-103-40-80-2.serveousercontent.com)
+- **Backend API Base**: [https://13243a1b972683b1-103-40-80-2.serveousercontent.com/backend-api](https://13243a1b972683b1-103-40-80-2.serveousercontent.com/backend-api)
+
 ### Production Deployment (Docker Compose)
 1. Navigate to `infra/`
 2. Copy `infra/.env.example` to `infra/.env` and update the secrets (e.g. `POSTGRES_PASSWORD`, `SECRET_KEY`).
