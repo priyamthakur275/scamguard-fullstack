@@ -8,7 +8,7 @@ from app_service.core.config import get_settings
 
 settings = get_settings()
 
-database_url = settings.DATABASE_URL
+database_url = settings.get_sqlalchemy_database_url
 connect_args = {}
 if make_url(database_url).drivername.startswith("postgresql"):
     connect_args = {"connect_timeout": 5}
