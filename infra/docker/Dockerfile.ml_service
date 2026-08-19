@@ -35,18 +35,16 @@ COPY ml_common ./ml_common
 COPY ml_service ./ml_service
 COPY ml_training ./ml_training
 
-# Bake the model artifacts directly into the image for simpler standalone
-# deployments on platforms like Render where persistent shared volumes
-# are not available on free tiers.
-RUN mkdir -p /app/artifacts && \
-    python -m ml_training.run_training --dataset ml_training/datasets/sample_messages.csv --version v1 --artifacts-dir /app/artifacts && \
-    chown -R appuser:appuser /app
-USER appuser
-
 ENV PATH=/home/appuser/.local/bin:$PATH \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     ARTIFACTS_DIR=/app/artifacts
+
+RUN mkdir -p /app/artifacts && chown -R appuser:appuser /app
+USER appuser
+
+# Bake the model artifacts directly into the image
+RUN python -m ml_training.run_training --dataset ml_training/datasets/sample_messages.csv --version v1 --artifacts-dir /app/artifacts
 
 EXPOSE 8002
 
