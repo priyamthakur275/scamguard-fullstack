@@ -9,7 +9,7 @@ const THEME_SCRIPT_CSP_HASH = "sha256-r2qJBVNKhKFz19zcP4wjY56kkrNRb8V7qorp5nWUlh
 
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' '${THEME_SCRIPT_CSP_HASH}'`,
+  "script-src 'self' 'unsafe-inline'",
   // 'unsafe-inline' for styles only: token-chip.tsx sets a computed,
   // per-request background color via the style attribute, which can't
   // be hashed ahead of time. Inline STYLE injection is a materially
