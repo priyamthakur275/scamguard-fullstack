@@ -28,7 +28,7 @@ class MessageService:
             response = httpx.post(
                 f"{settings.ML_SERVICE_URL}/api/v1/internal/predict",
                 json={"text": text, "input_type": input_type, "metadata": metadata},
-                timeout=10.0,
+                timeout=60.0,
             )
             response.raise_for_status()
             data = response.json()
